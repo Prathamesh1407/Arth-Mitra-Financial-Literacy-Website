@@ -51,7 +51,7 @@ const GoalSetting = () => {
         {remainingAmount !== '' && estimatedTime !== '' && (
           <div style={{ marginTop: '20px' }}>
             <h2>Remaining Amount Required: ${remainingAmount}</h2>
-            {/* <h2>Estimated Time Required: {estimatedTime} days</h2> */}
+            <h2>Estimated Time Required: {estimatedTime} days</h2>
           </div>
         )}
       </div>
