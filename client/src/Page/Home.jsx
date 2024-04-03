@@ -1,4 +1,7 @@
-import React from 'react'
+import React from 'react';
+import CustomButton from '../Components/CustomButton';
+// import hero-img from './assets/images/header-hero.png';
+import Card from '../Components/Card';
 
 const Home = () => {
   return (
@@ -10,7 +13,17 @@ const Home = () => {
             <CustomButton>
                 Chat with ArthaSathi 💬
             </CustomButton>
+
+            <div></div>
         </div>
+
+        
+
+        <div>
+            <h1><span>FinVeda,</span> comes with everything you need to get started!</h1>
+            <Card imageUrl={} , heading = "Finance Tools"/>
+        </div>
+        
 
     </div>
   )
