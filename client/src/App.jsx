@@ -10,11 +10,10 @@ function App() {
   return (
     <div>
       <Navbar/>
-      
-      {/* <ChatButton/> */}
+      <ChatButton/>
       <GoalSetting/>
-      {/* <Footer/> */}
-      {/* <LoginPage/> */}
+      <Footer/>
+      <LoginPage/>
     </div>
   );
 }

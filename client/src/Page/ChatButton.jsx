@@ -14,8 +14,8 @@ const ChatButton = () => {
   };
 
   return (
-    <button id="chatWithArthsathi" onClick={handleClick}>
-      Chat with Arthsathi
+    <button id="chatWithChanakya" onClick={handleClick}>
+      Chat with Chanakya
     </button>
   );
 };
