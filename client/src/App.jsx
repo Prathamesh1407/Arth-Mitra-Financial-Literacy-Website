@@ -10,7 +10,7 @@ import ExpenseTracker from "./Page/ExpenseTracker";
 import MarketSummary from "./Page/MarketSummary";
 import LoginComp from "./Page/SignUp";
 import { Route, Router, Routes } from "react-router";
-import Login from "./Page/SignUp";
+import Login from "./Page/Login";
 import SignUp from "./Page/SignUp";
 function App() {
   return (
@@ -26,6 +26,8 @@ function App() {
       {/* <LoginPage/>  */}
       <Routes>
         <Route path="/register" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/goalSetter" element={<GoalSetting/>}/>
       </Routes>
     </div>
   );
