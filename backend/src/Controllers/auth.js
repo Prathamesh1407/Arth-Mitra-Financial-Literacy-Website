@@ -5,7 +5,13 @@ const signUp = async (req, res) => {
   try {
     const { username, name, email, password, ageGroup } = req.body;
     //validations
-    if (!username || !name || !email || !password || !ageGroup) {
+    if (
+        !username ||
+      !email ||
+      !password ||
+      !ageGroup
+      
+    ) {
       return res.status(403).json({
         success: false,
         message: "All fields are required ",
@@ -22,11 +28,12 @@ const signUp = async (req, res) => {
     }
     //register user
     const user = await User.create({
-      fullName: name,
       username,
       email,
       password: password,
       ageGroup,
+      coins:50
+      
     });
     const jsonUser = JSON.stringify(user);
     res.status(201).json({
@@ -70,12 +77,24 @@ const Login = async (req, res) => {
         message: "Invalid Password",
       });
     }
-    const accessToken = await user.generateAccessToken();
+    const token = await user.generateAccessToken();
 
     const options = {
-      httpOnly: true,
-      secure: true,
-    };
+        httpOnly: true,
+        secure: true
+    }
+
+    return res.status(200).cookie("token", token, options).json({
+      success: true,
+      message: "login successfully",
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email
+      },
+      token,
+    });
+
 
     return res
       .status(200)

@@ -1,25 +1,28 @@
 import {Goal} from "../models/goal.model.js";
+import { User } from "../models/user.model.js";
 
 
 const addGoal = async(req ,res)=>{
     try{
-        const {currentAmount , totalAmount , description , startDate} = req.body;
+        const {currentAmount , totalAmount , description } = req.body;
 
         const id = req.user._id;
 
-        if(!currentAmount || !totalAmount || !description || !startDate || !id){
+        if(!currentAmount || !totalAmount || !description || !id){
             return res.status(400).json({
 				success: false,
 				message: "All Fields are Mandatory",
 			});
         }
 
+        const user = await User.findByIdAndUpdate(id, { $inc: { coins: 1 } }, { new: true });
+
         const newGoal = await Goal.create({
             userId:id,
             currentAmount,
             totalAmount,
             description,
-            startDate
+            startDate: Date.now()
         })
         console.log(newGoal)
         return res.status(200).json({ newGoal , message:"Goal added successfully"})
@@ -119,6 +122,9 @@ const UpdateAmount = async(req ,res)=>{
         goal.currentAmount += amount;
 
         await goal.save();
+
+        const user = await User.findByIdAndUpdate(id, { $inc: { coins: 1 } }, { new: true });
+
 
 
         return res.status(201).json({

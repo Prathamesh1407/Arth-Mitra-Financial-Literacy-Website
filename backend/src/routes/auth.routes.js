@@ -8,6 +8,6 @@ const router = Router();
 
 
 router.route("/register").post(signUp);
-router.route("/login").post(Login);
+router.route("/Login").post(Login);
 
 export default router;
