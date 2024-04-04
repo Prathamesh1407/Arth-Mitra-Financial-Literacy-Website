@@ -108,7 +108,7 @@ const getGoal = async(req, res)=>{
 
 const UpdateAmount = async(req ,res)=>{
     try {
-        const {id , amount } = req.body;
+        let {id , amount } = req.body;
 
         const goal  = await Goal.findById(id);
 
@@ -119,11 +119,21 @@ const UpdateAmount = async(req ,res)=>{
 			});
         }
 
+        amount = parseInt(amount)
+
+        const prevP = (goal.currentAmount/goal.totalAmount)*100;
+
         goal.currentAmount += amount;
+
+        if(goal.currentAmount > goal.totalAmount){
+            goal.currentAmount = goal.totalAmount;
+        }
 
         await goal.save();
 
-        const user = await User.findByIdAndUpdate(id, { $inc: { coins: 1 } }, { new: true });
+        const afterP = (goal.currentAmount/goal.totalAmount)*100;
+
+        const user = await User.findByIdAndUpdate(id, { $inc: { coins: afterP-prevP } }, { new: true });
 
 
 
@@ -131,6 +141,7 @@ const UpdateAmount = async(req ,res)=>{
             success: true,
             message: "Current amount updated in goal",
             goal,
+            increment:afterP-prevP
         });
         
     } catch (error) {

@@ -1,5 +1,10 @@
-import { User } from "../models/user.model.js";
-import bcrypt from "bcrypt";
+import {User} from '../models/user.model.js';
+import jwt from "jsonwebtoken"
+import bcrypt from "bcrypt"
+import dotenv from "dotenv"
+
+dotenv.config();
+
 
 const signUp = async (req, res) => {
   try {
@@ -77,7 +82,17 @@ const Login = async (req, res) => {
         message: "Invalid Password",
       });
     }
-    const token = await user.generateAccessToken();
+    const token = await  jwt.sign({
+                        _id: user._id,
+                        email: user.email,
+                        username: user.username,
+                        fullName: user.fullName,
+                        ageGroup: user.ageGroup
+                    },
+                    process.env.JWT_SECRET,
+                    {
+                        expiresIn: process.env.JWT_EXPIRY
+                    })
 
     const options = {
         httpOnly: true,
@@ -95,20 +110,30 @@ const Login = async (req, res) => {
       token,
     });
 
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Error while Logging In",
+      error,
+    });
 
-    return res
-      .status(200)
-      .cookie("accessToken", accessToken, options)
-      .json({
-        success: true,
-        message: "login successfully",
-        user: {
-          _id: user._id,
-          name: user.name,
-          email: user.email,
-        },
-        accessToken,
-      });
+    
+  }
+};
+
+const getCoins = async(req, res)=>{
+  try {
+    const id = req.user._id;
+
+    const user = await User.findById(id);
+
+    return res.status(200).json({
+      success: true,
+      message: "login successfully",
+      coins:user.coins,
+    });
+
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -117,6 +142,10 @@ const Login = async (req, res) => {
       error,
     });
   }
-};
+}
 
-export { signUp, Login };
+export {
+    signUp,
+    Login,
+    getCoins
+}
