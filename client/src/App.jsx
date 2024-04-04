@@ -5,16 +5,20 @@ import Footer from "./Components/Footer";
 import Home from "./Page/Home";
 import GoalSetting from "./Page/GoalSetting";
 import ChatButton from "./Page/ChatButton";
+import Trends from "./Page/Trends";
+import News from "./Page/News";
 
 function App() {
   return (
     <div>
-      <Navbar/>
-      
-      {/* <ChatButton/> */}
-      <GoalSetting/>
-      {/* <Footer/> */}
-      {/* <LoginPage/> */}
+      <News/>
+      {/* <Navbar/>
+      <News/>
+      <Trends/>
+      <ChatButton/>
+      <GoalSetting/> 
+      <Footer/>
+      <LoginPage/> */}
     </div>
   );
 }
