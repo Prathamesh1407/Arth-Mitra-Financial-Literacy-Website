@@ -11,13 +11,14 @@ import News from "./Page/News";
 function App() {
   return (
     <div>
-      <Navbar/>
+      <News/>
+      {/* <Navbar/>
       <News/>
       <Trends/>
       <ChatButton/>
       <GoalSetting/> 
       <Footer/>
-      <LoginPage/>
+      <LoginPage/> */}
     </div>
   );
 }
