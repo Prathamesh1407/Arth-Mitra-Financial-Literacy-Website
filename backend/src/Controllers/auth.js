@@ -1,20 +1,11 @@
-import {User} from '../models/user.model.js';
-import bcrypt from 'bcrypt';
-
-
+import { User } from "../models/user.model.js";
+import bcrypt from "bcrypt";
 
 const signUp = async (req, res) => {
   try {
-    const { username , name, email, password , ageGroup } = req.body;
+    const { username, name, email, password, ageGroup } = req.body;
     //validations
-    if (
-        !username ||
-      !name ||
-      !email ||
-      !password ||
-      !ageGroup
-      
-    ) {
+    if (!username || !name || !email || !password || !ageGroup) {
       return res.status(403).json({
         success: false,
         message: "All fields are required ",
@@ -36,7 +27,6 @@ const signUp = async (req, res) => {
       email,
       password: password,
       ageGroup,
-      
     });
     const jsonUser = JSON.stringify(user);
     res.status(201).json({
@@ -44,7 +34,6 @@ const signUp = async (req, res) => {
       message: "User Registered Successfully",
       user: user,
     });
-
   } catch (error) {
     console.log(error);
     res.status(500).send({
@@ -54,10 +43,6 @@ const signUp = async (req, res) => {
     });
   }
 };
-
-
-
-
 
 //POST LOGIN
 const Login = async (req, res) => {
@@ -88,22 +73,23 @@ const Login = async (req, res) => {
     const accessToken = await user.generateAccessToken();
 
     const options = {
-        httpOnly: true,
-        secure: true
-    }
+      httpOnly: true,
+      secure: true,
+    };
 
-    return res.status(200).cookie("accessToken", accessToken, options).json({
-      success: true,
-      message: "login successfully",
-      user: {
-        _id: user._id,
-        name: user.name,
-        email: user.email
-      },
-      accessToken,
-    });
-
-
+    return res
+      .status(200)
+      .cookie("accessToken", accessToken, options)
+      .json({
+        success: true,
+        message: "login successfully",
+        user: {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+        },
+        accessToken,
+      });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -114,7 +100,4 @@ const Login = async (req, res) => {
   }
 };
 
-export {
-    signUp,
-    Login
-}
+export { signUp, Login };
