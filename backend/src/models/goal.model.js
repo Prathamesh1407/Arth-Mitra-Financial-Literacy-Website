@@ -10,7 +10,7 @@ const goalSchema = new Schema(
             type:Number,
             require:true,
         },
-        totalAmount:{
+        totalAmount:{   
             type:Number,
             require:true,
         },

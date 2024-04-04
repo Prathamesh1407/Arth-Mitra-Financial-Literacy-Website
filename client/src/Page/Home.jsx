@@ -23,13 +23,11 @@
 //             <div></div>
 //         </div>
 
-        
-
 //         <div>
 //             <h1><span>FinVeda,</span> comes with everything you need to get started!</h1>
 //             <Card imageUrl={imgHeader} heading = "Finance Tools"  description = "With our SIP and PPF tools you will discover the power of compounding and make informed decisions regarding your long-term savings."/>
 //         </div>
-        
+
 //     </div>
 //   )
 // }
@@ -71,7 +69,6 @@
 // };
 
 // export default Home;
-
 
 // import React from 'react';
 // import Card from '../Components/Card';
@@ -170,4 +167,3 @@ const Home = () => {
 };
 
 export default Home;
-

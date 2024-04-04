@@ -10,7 +10,7 @@ import ExpenseTracker from "./Page/ExpenseTracker";
 import MarketSummary from "./Page/MarketSummary";
 import LoginComp from "./Page/SignUp";
 import { Route, Router, Routes } from "react-router";
-import Login from "./Page/SignUp";
+import Login from "./Page/Login";
 import SignUp from "./Page/SignUp";
 import SIPCalculator from "./Page/SIPCalculator";
 import TaxSavingInformation from "./Page/TaxSavingInformation";
@@ -29,9 +29,11 @@ function App() {
       {/* <Home/> */}
       {/* <Footer/> */}
       {/* <LoginPage/>  */}
-      {/* <Routes>
+      { <Routes>
         <Route path="/register" element={<SignUp />} />
-      </Routes> */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/goalSetter" element={<GoalSetting/>}/>
+      </Routes>
     </div>
   );
 }

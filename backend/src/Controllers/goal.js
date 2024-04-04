@@ -1,21 +1,24 @@
-import {Goal} from "../models/goal.model.js";
+import { Goal } from "../models/goal.model.js";
 import { User } from "../models/user.model.js";
 
+const addGoal = async (req, res) => {
+  try {
+    const { currentAmount, totalAmount, description } = req.body;
 
-const addGoal = async(req ,res)=>{
-    try{
-        const {currentAmount , totalAmount , description } = req.body;
+    const id = req.user._id;
 
-        const id = req.user._id;
+    if (!currentAmount || !totalAmount || !description || !id) {
+      return res.status(400).json({
+        success: false,
+        message: "All Fields are Mandatory",
+      });
+    }
 
-        if(!currentAmount || !totalAmount || !description || !id){
-            return res.status(400).json({
-				success: false,
-				message: "All Fields are Mandatory",
-			});
-        }
-
-        const user = await User.findByIdAndUpdate(id, { $inc: { coins: 1 } }, { new: true });
+    const user = await User.findByIdAndUpdate(
+      id,
+      { $inc: { coins: 1 } },
+      { new: true }
+    );
 
         const newGoal = await Goal.create({
             userId:id,
@@ -37,38 +40,35 @@ const addGoal = async(req ,res)=>{
     }
 }
 
-const removeGoal = async(req , res)=>{
-    try {
-
-        const {id} = req.body;
-
-        if(!id){
-            return res.status(400).json({
-				success: false,
-				message: "All Fields are Mandatory",
-			});
-        }
-
-        await Goal.findByIdAndDelete(id);
-      
-
-        return res.status(200).json({message: "Transaction removed successfully"})
-        
-    } catch (error) {
-        console.error(error);
-		res.status(500).json({
-			success: false,
-			message: "Failed to remove transaction",
-			error: error.message,
-		});
-    }
-}
-
-const getAllGoal = async(req ,res)=>{
-    
+const removeGoal = async (req, res) => {
   try {
-    const allGoals = await Goal.find({userId: req.user._id});
+    const { id } = req.body;
 
+    if (!id) {
+      return res.status(400).json({
+        success: false,
+        message: "All Fields are Mandatory",
+      });
+    }
+
+    await Goal.findByIdAndDelete(id);
+
+    return res
+      .status(200)
+      .json({ message: "Transaction removed successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to remove transaction",
+      error: error.message,
+    });
+  }
+};
+
+const getAllGoal = async (req, res) => {
+  try {
+    const allGoals = await Goal.find({ userId: req.user._id });
 
     return res.status(201).json({
       success: true,
@@ -81,73 +81,76 @@ const getAllGoal = async(req ,res)=>{
       message: err,
     });
   }
-}
+};
 
-const getGoal = async(req, res)=>{
-    try {
+const getGoal = async (req, res) => {
+  try {
+    const { id } = req.body;
 
-        const {id} = req.body;
+    const goal = await Goal.findById(id);
 
-        const goal  = await Goal.findById(id);
+    return res.status(201).json({
+      success: true,
+      message: "Category Successfully Displayed",
+      goal,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to remove transaction",
+      error: error.message,
+    });
+  }
+};
 
-        return res.status(201).json({
-            success: true,
-            message: "Category Successfully Displayed",
-            goal,
-        });
-        
-    } catch (error) {
-        console.error(error);
-		res.status(500).json({
-			success: false,
-			message: "Failed to remove transaction",
-			error: error.message,
-		});
+const UpdateAmount = async (req, res) => {
+  try {
+    let { id, amount } = req.body;
+
+    const goal = await Goal.findById(id);
+
+    if (!goal || !amount) {
+      return res.status(400).json({
+        success: false,
+        message: "All Fields are Mandatory",
+      });
     }
-}
 
-const UpdateAmount = async(req ,res)=>{
-    try {
-        const {id , amount } = req.body;
+    amount = parseInt(amount);
 
-        const goal  = await Goal.findById(id);
+    const prevP = (goal.currentAmount / goal.totalAmount) * 100;
 
-        if(!goal || !amount){
-            return res.status(400).json({
-				success: false,
-				message: "All Fields are Mandatory",
-			});
-        }
+    goal.currentAmount += amount;
 
-        goal.currentAmount += amount;
-
-        await goal.save();
-
-        const user = await User.findByIdAndUpdate(id, { $inc: { coins: 1 } }, { new: true });
-
-
-
-        return res.status(201).json({
-            success: true,
-            message: "Current amount updated in goal",
-            goal,
-        });
-        
-    } catch (error) {
-        console.error(error);
-		res.status(500).json({
-			success: false,
-			message: "Failed to update amount",
-			error: error.message,
-		});
+    if (goal.currentAmount > goal.totalAmount) {
+      goal.currentAmount = goal.totalAmount;
     }
-}
 
+    await goal.save();
 
-export {
-    getAllGoal,
-    getGoal,
-    removeGoal,
-    addGoal,
-    UpdateAmount
-}
+    const afterP = (goal.currentAmount / goal.totalAmount) * 100;
+
+    const user = await User.findByIdAndUpdate(
+      id,
+      { $inc: { coins: afterP - prevP } },
+      { new: true }
+    );
+
+    return res.status(201).json({
+      success: true,
+      message: "Current amount updated in goal",
+      goal,
+      increment: afterP - prevP,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to update amount",
+      error: error.message,
+    });
+  }
+};
+
+export { getAllGoal, getGoal, removeGoal, addGoal, UpdateAmount };

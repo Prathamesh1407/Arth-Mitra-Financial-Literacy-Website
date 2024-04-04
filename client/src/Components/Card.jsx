@@ -1,46 +1,88 @@
-// // import React from 'react';
+// import { useState } from "react";
+// import ProgressBar from "./ProgressBar";
+// import { toast } from "react-hot-toast";
+// import { Modal } from "antd";
+// import axios from "axios";
+// import { useCookies } from "react-cookie";
+// const [cookies, setCookie] = useCookies(["token"]);
 
-// // const Card = ({ imageUrl, heading, description }) => {
-// //   return (
-// //     <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white text-blue-300">
-// //       <img className="w-full" src={imageUrl} alt="Card" />
-// //       <div className="px-6 py-4">
-// //         <div className="font-bold text-xl mb-2">{heading}</div>
-// //         <p className="text-gray-700 text-base">{description}</p>
-// //       </div>
-// //       <div className="px-6 pt-4 pb-2">
-// //         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-// //           Learn More
-// //         </button>
-// //       </div>
-// //     </div>
-// //   );
-// // };
+// import CategoryForm from "./CategoryForm";
+// const Card = ({ info,value,setValue }) => {
+//   const [updatedAmount, setUpdatedAmount] = useState(0);
+//   const [visible, setVisible] = useState(false);
+//   //const [selected, setSelected] = useState(null);
 
-// // export default Card;
+//   const getAllGoals = async () => {
+//     try {
+//       const { data } = await axios.post(
+//         `${process.env.REACT_APP_BACKEND_URL}/getAllGoal`,
+//         {
+//           accessToken: cookies.token,
+//         }
+//       );
+//       if (data) {
+//         setGoals(data?.allGoals);
+//       }
+//     } catch (err) {
+//       console.log(err);
+//       toast.error("Error while getting the Goals ");
+//     }
+//   };
 
 
-// import React from 'react';
-// import { Link } from 'react-router-dom';
+//   const handleUpdate = async (e) => {
+//     e.preventDefault();
+//     try {
+//       const { data } = await axios.post(
+//         `${process.env.REACT_APP_BACKEND_URL}/UpdateAmount`,
+//         { amount: updatedAmount, id: info._id, accessToken: cookies.token }
+//       );
 
-// const Card = ({ imgSrc, title, description }) => {
+//       if (data) {
+//         toast.success(`Amount Updated , 🪙 1 Coin for You as Reward`);
+//         setVisible(false);
+//         getAllGoals();
+//         //setUpdatedName("")
+//       } else {
+//         toast.error("Error While Updating");
+//       }
+//     } catch (err) {
+//       console.log("Error in the Category Form", err);
+//     }
+//   };
 //   return (
-//     <div className="max-w-sm rounded overflow-hidden shadow-lg">
-//       <img className="w-full" src={imgSrc} alt={title} />
+//     <div className="max-w-sm rounded overflow-hidden shadow-lg m-4">
+//       {/* <img className="w-full" src={urlToImage} alt={title} /> */}
+//       <ProgressBar percentage={(info.currentAmount / info.totalAmount) * 100} />
 //       <div className="px-6 py-4">
-//         <div className="font-bold text-xl mb-2">{title}</div>
-//         <p className="text-gray-700 text-base">{description}</p>
+//         <div className="font-bold text-xl mb-2">{info.description}</div>
+//         <div className="font-bold text-xl mb-2">
+//           Current Amount Saved : ₹ {info.currentAmount}
+//         </div>
+//         <div className="font-bold text-xl mb-2">
+//           ₹ {info.totalAmount - info.currentAmount} Left to Save More
+//         </div>
 //       </div>
 //       <div className="px-6 py-4">
-//         {/* <Link to="/login" className="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-//           Learn More
-//         </Link> */}
-//         <span className=' text-black justify-center items-center flex'>Learn More</span>
+//         <button
+//           onClick={() => {
+//             setVisible(true);
+//             setUpdatedAmount(info.amount);
+//           }}
+//         >
+//           Update Amount
+//         </button>
 //       </div>
+//       <Modal onCancel={() => setVisible(false)} footer={null} visible={visible}>
+//         <CategoryForm
+//           handleSubmit={handleUpdate}
+//           value={updatedAmount}
+//           setValue={setUpdatedAmount}
+//         />
+//       </Modal>
 //     </div>
 //   );
 // };
-
 // export default Card;
 
 // import React from 'react';
@@ -64,7 +106,6 @@
 
 // export default Card;
 
-
 import React from 'react';
 
 const Card = ({ imgSrc, title, description }) => {
@@ -85,32 +126,3 @@ const Card = ({ imgSrc, title, description }) => {
 };
 
 export default Card;
-
-
-// 
-
-// import React from 'react';
-// import demo from './demo.css';
-
-// const Card = ({ imgSrc1, imgSrc2, title, description }) => {
-//   return (
-//     <div className="max-w-md rounded overflow-hidden shadow-lg border border-gray-200 hover:border-blue-500 transition duration-300 ease-in-out m-4 cursor-pointer">
-//       <div className="flex items-center justify-center">
-//         <img className=" w-48 rounded-full h-48 object-cover" src={imgSrc1} alt={title} />
-//         <img className="w-48 h-48 object-cover" src={imgSrc2} alt={title} />
-//         <i ></i>
-//       </div>
-//       <div className="px-6 py-4">
-//         <div className="font-bold text-xl mb-2">{title}</div>
-//         <p className="text-gray-700 text-base">{description}</p>
-//       </div>
-//       <div className="px-6 pt-4 pb-2 mb-5">
-//         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-//           Learn More
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Card;
