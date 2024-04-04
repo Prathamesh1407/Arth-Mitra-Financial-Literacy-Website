@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Modal } from "antd";
 import CategoryForm from "../Components/CategoryForm";
+import { useAuth } from "../../context/auth";
 const GoalSetting = () => {
+  const [auth, setAuth] = useAuth();
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
   const [updatedName, setUpdatedName] = useState("");
@@ -11,10 +13,9 @@ const GoalSetting = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await makeAuthenticatedPOSTRequest(
-        "/api/v1/category/create-category",
-        { name },
-        auth?.token
+      await axios(
+        "/addGoal",
+        {currentAmount,totalAmount,description,startDate},
       ).then((res) => {
         if (res.success) {
           toast.success(`${name} Category is Created`);

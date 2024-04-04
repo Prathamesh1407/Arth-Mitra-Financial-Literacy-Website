@@ -1,4 +1,4 @@
-import LoginPage from "./Components/LoginPage";
+
 import Navbar from "./Components/Navbar";
 import "./App.css";
 import Footer from "./Components/Footer";
@@ -11,7 +11,7 @@ import News from "./Page/News";
 function App() {
   return (
     <div>
-      <News/>
+      {/* <News/> */}
       {/* <Navbar/>
       <News/>
       <Trends/>
