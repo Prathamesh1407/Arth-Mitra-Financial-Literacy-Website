@@ -7,6 +7,8 @@ import GoalSetting from "./Page/GoalSetting";
 import ChatButton from "./Page/ChatButton";
 import Trends from "./Page/Trends";
 import News from "./Page/News";
+import ExpenseTracker from "./Page/ExpenseTracker";
+import MarketSummary from "./Page/MarketSummary";
 
 function App() {
   return (
@@ -15,10 +17,11 @@ function App() {
       {/* <Navbar/>
       <News/>
       <Trends/>
-      <ChatButton/>
-      <GoalSetting/> 
-      <Footer/>
-      <LoginPage/> */}
+      <MarketSummary/>
+      {/* <ChatButton/> */}
+      {/* <GoalSetting/>  */}
+      {/* <Footer/> */}
+      {/* <LoginPage/>  */}
     </div>
   );
 }
