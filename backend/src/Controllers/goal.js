@@ -20,26 +20,25 @@ const addGoal = async (req, res) => {
       { new: true }
     );
 
-    const newGoal = await Goal.create({
-      userId: id,
-      currentAmount,
-      totalAmount,
-      description,
-      startDate: Date.now(),
-    });
-    console.log(newGoal);
-    return res
-      .status(200)
-      .json({ newGoal, message: "Goal added successfully" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      success: false,
-      message: "Failed to add goal",
-      error: error.message,
-    });
-  }
-};
+        const newGoal = await Goal.create({
+            userId:id,
+            currentAmount,
+            totalAmount,
+            description,
+            startDate: Date.now()
+        })
+        console.log(newGoal)
+        return res.status(200).json({ newGoal , message:"Goal added successfully"})
+
+    }catch(error){
+        console.error(error);
+		res.status(500).json({
+			success: false,
+			message: "Failed to add goal",
+			error: error.message,
+		});
+    }
+}
 
 const removeGoal = async (req, res) => {
   try {
