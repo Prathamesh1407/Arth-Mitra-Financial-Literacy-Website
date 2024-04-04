@@ -5,7 +5,7 @@ const GoalSetting = () => {
   const [goalPrice, setGoalPrice] = useState('');
   const [monthlyIncome, setMonthlyIncome] = useState('');
   const [dailySavings, setDailySavings] = useState('');
-  const [remainingAmount, setRemainingAmount] = useState('');
+  const [remainingAmount,setRemainingAmount] = useState('');
   const [estimatedTime, setEstimatedTime] = useState('');
 
   const handleSubmit = (e) => {
