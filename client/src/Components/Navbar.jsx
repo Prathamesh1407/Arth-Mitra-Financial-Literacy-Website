@@ -233,7 +233,7 @@ const Navbar = ({ loggedIn, age, coinsCount }) => {
           {navbarType === 'navbarType2' && <NavbarType2 />}
         </>
       ) : (
-        <nav className=" bg-red-500 p-4">
+        <nav className=" bg-blue-800 p-4">
           <div className="flex justify-between space-x-4">
             <span className="text-white hover:text-gray-300 cursor-pointer">Home</span>
             <span className="text-white hover:text-gray-300 cursor-pointer">Login/Register</span>

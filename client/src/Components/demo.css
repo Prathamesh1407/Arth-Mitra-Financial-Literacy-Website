@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Define a custom utility class */
+.lni-baloon:before {
+  content: "\ea10";
+}
+
+/* Additional styles for the .lni-baloon class can be added here */

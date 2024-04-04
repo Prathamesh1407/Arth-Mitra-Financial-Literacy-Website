@@ -5,7 +5,6 @@ import { useCookies } from "react-cookie";
 import TextInput from "../Components/TextInput";
 import PasswordInput from "../Components/PasswordInput";
 import axios from "axios";
-import { Dropdown } from "primereact/dropdown";
 import { Select } from "antd";
 const { Option } = Select;
 const SignUp = () => {
