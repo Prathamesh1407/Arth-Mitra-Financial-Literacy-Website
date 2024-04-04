@@ -8,11 +8,16 @@ dotenv.config()
 const requireSignIn = async(req, res, next) => {
   try {
     const token = req.headers.authorization;
-    const decode = await JWT.verify(token, process.env.JWT_SECRET);
+    const decode = JWT.verify(token, process.env.JWT_SECRET);
     req.user = decode;
     next();
   } catch (error) {
-    console.log("Error in MiddleWare",error);
+    console.log("Error in MiddleWare :-",error);
+    return res.status(401).send({
+      success: false,
+      error,
+      message: "Error in middleware",
+    });
   }
 };
 
@@ -30,7 +35,7 @@ const isAgeGroup1 = async (req, res, next) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(401).send({
+    return res.status(401).send({
       success: false,
       error,
       message: "Error in admin middleware",
@@ -51,7 +56,7 @@ const isAgeGroup2 = async (req, res, next) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(401).send({
+    return res.status(401).send({
       success: false,
       error,
       message: "Error in admin middleware",
@@ -107,5 +112,4 @@ export{
     isAgeGroup2,
     isAgeGroup3,
     isAgeGroup4
-
 }
