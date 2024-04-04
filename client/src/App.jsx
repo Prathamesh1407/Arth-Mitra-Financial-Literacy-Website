@@ -1,4 +1,3 @@
-import LoginPage from "./Components/LoginPage";
 import Navbar from "./Components/Navbar";
 import "./App.css";
 import Footer from "./Components/Footer";
@@ -9,20 +8,26 @@ import Trends from "./Page/Trends";
 import News from "./Page/News";
 import ExpenseTracker from "./Page/ExpenseTracker";
 import MarketSummary from "./Page/MarketSummary";
-
+import LoginComp from "./Page/SignUp";
+import { Route, Router, Routes } from "react-router";
+import Login from "./Page/SignUp";
+import SignUp from "./Page/SignUp";
 function App() {
   return (
     <div>
-      {/* <ExpenseTracker/> */}
       {/* <News/> */}
-      {/* <Navbar loggedIn={false} age={3} coinsCount={20}/> */}
-      {/* <Trends/> */}
-      {/* <MarketSummary/> */}
+      {/* <Navbar/>
+      <News/>
+      <Trends/>
+      <MarketSummary/>
       {/* <ChatButton/> */}
       {/* <GoalSetting/>  */}
       <Home/>
       {/* <Footer/> */}
       {/* <LoginPage/>  */}
+      <Routes>
+        <Route path="/register" element={<SignUp />} />
+      </Routes>
     </div>
   );
 }

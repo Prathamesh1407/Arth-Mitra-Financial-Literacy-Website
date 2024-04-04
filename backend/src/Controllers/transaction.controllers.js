@@ -28,6 +28,9 @@ const addTransaction = async(req ,res)=>{
 
         });
 
+        const user = await User.findByIdAndUpdate(id, { $inc: { coins: 1 } }, { new: true });
+
+
         return res.status(200).json({t , message:"Transaction added successfully"})
 
     }catch(error){
