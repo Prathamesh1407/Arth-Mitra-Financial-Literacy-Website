@@ -15,6 +15,7 @@ import {
 
 import {
     requireSignIn,
+    isAgeGroup1,
     isAgeGroup2,
     
 } from '../middlewares/auth.middleware.js';
@@ -23,15 +24,15 @@ import {
 const router = Router();
 
 
-router.route("/getAllTransaction").post(requireSignIn , isAgeGroup2 , getAllTransaction);
-router.route("/addTransaction").post(requireSignIn , isAgeGroup2 ,addTransaction);
-router.route("/getTransaction").post(requireSignIn , isAgeGroup2 ,getTransaction);
-router.route("/removeTransaction").post(requireSignIn , isAgeGroup2 ,removeTransaction);
-router.route("/clearTransactions").post(requireSignIn , isAgeGroup2 ,clearTransactions);
+router.route("/getAllTransaction").post(requireSignIn , isAgeGroup1 , getAllTransaction);
+router.route("/addTransaction").post(requireSignIn , isAgeGroup1 ,addTransaction);
+router.route("/getTransaction").post(requireSignIn , isAgeGroup1 ,getTransaction);
+router.route("/removeTransaction").post(requireSignIn , isAgeGroup1 ,removeTransaction);
+router.route("/clearTransactions").post(requireSignIn , isAgeGroup1,clearTransactions);
 
-router.route("/getAllCategories").post(requireSignIn , isAgeGroup2 ,getAllCategories);
-router.route("/removeCategory").post(requireSignIn , isAgeGroup2 ,removeCategory);
-router.route("/addCategory").post(requireSignIn , isAgeGroup2 ,addCategory);
+router.route("/getAllCategories").post(requireSignIn , isAgeGroup1 ,getAllCategories);
+router.route("/removeCategory").post(requireSignIn , isAgeGroup1 ,removeCategory);
+router.route("/addCategory").post(requireSignIn , isAgeGroup1 ,addCategory);
 
 
 export default router;
