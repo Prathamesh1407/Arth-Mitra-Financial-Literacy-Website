@@ -105,3 +105,24 @@
 // };
 
 // export default Card;
+
+import React from 'react';
+
+const Card = ({ imgSrc, title, description }) => {
+  return (
+    <div className="max-w-sm rounded overflow-hidden shadow-lg border w-3/4 border-gray-200 hover:border-orange-500 transition duration-300 ease-in-out cursor-pointer">
+      <img className="w-full h-2/3 object-cover" src={imgSrc} alt={title} />
+      <div className="px-6 py-4">
+        <div className="font-bold text-black text-xl mb-2">{title}</div>
+        <p className="text-gray-700 text-base">{description}</p>
+      </div>
+      <div className="flex justify-center items-center px-6 pt-4 pb-2 mb-12">
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+          Learn More
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default Card;

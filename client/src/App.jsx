@@ -22,7 +22,7 @@ function App() {
       <MarketSummary/>
       {/* <ChatButton/> */}
       {/* <GoalSetting/>  */}
-      <Home/>
+      {/* <Home/> */}
       {/* <Footer/> */}
       {/* <LoginPage/>  */}
       <Routes>

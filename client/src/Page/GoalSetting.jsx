@@ -20,7 +20,11 @@ const GoalSetting = () => {
     try {
       const { data } = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/UpdateAmount`,
-        { amount: parseInt(updatedAmount), id: selected._id, accessToken: cookies.token }
+        {
+          amount: parseInt(updatedAmount),
+          id: selected._id,
+          accessToken: cookies.token,
+        }
       );
 
       if (data) {
@@ -36,10 +40,6 @@ const GoalSetting = () => {
       console.log("Error in the Category Form", err);
     }
   };
-
-
-
-
 
   const getAllGoals = async () => {
     try {
@@ -57,11 +57,6 @@ const GoalSetting = () => {
       toast.error("Error while getting the Goals ");
     }
   };
-
-
-
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -90,7 +85,6 @@ const GoalSetting = () => {
     <div className="col-md-9">
       <h1>Manage Goals</h1>
       <div className="p-3">
-
         <TextInput
           label={"Goal"}
           placeholder={"Enter Your Goal"}
@@ -150,4 +144,3 @@ const GoalSetting = () => {
 };
 
 export default GoalSetting;
-
