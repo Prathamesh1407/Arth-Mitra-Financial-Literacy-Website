@@ -15,11 +15,12 @@ function App() {
     <div>
       {/* <ExpenseTracker/> */}
       {/* <News/> */}
-      {/* <Navbar/> */}
-      <Trends/>
-      <MarketSummary/>
+      {/* <Navbar loggedIn={false} age={3} coinsCount={20}/> */}
+      {/* <Trends/> */}
+      {/* <MarketSummary/> */}
       {/* <ChatButton/> */}
       {/* <GoalSetting/>  */}
+      <Home/>
       {/* <Footer/> */}
       {/* <LoginPage/>  */}
     </div>
