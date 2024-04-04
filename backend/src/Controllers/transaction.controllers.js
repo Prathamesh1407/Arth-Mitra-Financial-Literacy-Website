@@ -4,11 +4,11 @@ import { User } from "../models/user.model.js";
 
 const addTransaction = async(req ,res)=>{
     try{
-        const {amount , category , description , date } = req.body;
+        const {amount , category , description } = req.body;
 
         const userId = req.user._id;
 
-        if(!amount || !category || !description || !userId){
+        if(!amount || !category || !userId){
             return res.status(400).json({
 				success: false,
 				message: "All Fields are Mandatory",
@@ -21,14 +21,14 @@ const addTransaction = async(req ,res)=>{
 
         const t = await Transaction.create({
             amount,
-            description,
-            date : date|| Date.now(),
+            description:description || "",
+            date : Date.now(),
             userId:userId,
             category: categoryDetails._id
 
         });
 
-        return res.status(200).json(200, t , "Transaction added successfully")
+        return res.status(200).json({t , message:"Transaction added successfully"})
 
     }catch(error){
         console.error(error);
@@ -55,7 +55,7 @@ const removeTransaction = async(req , res)=>{
         await Transaction.findByIdAndDelete(transactionId);
       
 
-        return res.status(200).json(200 , "Transaction removed successfully")
+        return res.status(200).json({message:"Transaction removed successfully"})
         
     } catch (error) {
         console.error(error);
@@ -82,9 +82,9 @@ const getAllTransaction = async(req , res)=>{
 			});
         }
 
-        const allTransaction = await Transaction.find({userId:id}).populate("Category");
+        const allTransaction = await Transaction.find({userId:id}).populate("category");
 
-        return res.status(200).json(200 , allTransaction ,"Transaction fetched successfully")
+        return res.status(200).json({allTransaction ,message:"Transaction fetched successfully" })
         
     } catch (error) {
         console.error(error);
@@ -119,10 +119,43 @@ const getTransaction = async(req, res)=>{
     }
 }
 
+
+const clearTransactions = async(req , res)=>{
+    try {
+
+        const id = req.user._id;
+
+        if(!id){
+            return res.status(400).json({
+				success: false,
+				message: "user not specified",
+			});
+        }
+
+        await Transaction.deleteMany({userId:id});
+
+        return res.status(201).json({
+            success: true,
+            message: "deleted Successfully"
+          
+        });
+
+        
+    } catch (error) {
+        console.error(error);
+		return res.status(500).json({
+			success: false,
+			message: "Failed to remove transaction",
+			error: error.message,
+		});
+    }
+}
+
 export{
     getAllTransaction,
     getTransaction,
     removeTransaction,
-    addTransaction
+    addTransaction,
+    clearTransactions
     
 }

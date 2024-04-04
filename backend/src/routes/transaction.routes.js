@@ -4,7 +4,8 @@ import {
     getAllTransaction,
     getTransaction,
     removeTransaction,
-    addTransaction} from '../Controllers/transaction.controllers.js';
+    addTransaction,
+    clearTransactions} from '../Controllers/transaction.controllers.js';
  import {
     getAllCategories,
     addCategory,
@@ -26,6 +27,7 @@ router.route("/getAllTransaction").post(requireSignIn , isAgeGroup2 , getAllTran
 router.route("/addTransaction").post(requireSignIn , isAgeGroup2 ,addTransaction);
 router.route("/getTransaction").post(requireSignIn , isAgeGroup2 ,getTransaction);
 router.route("/removeTransaction").post(requireSignIn , isAgeGroup2 ,removeTransaction);
+router.route("/clearTransactions").post(requireSignIn , isAgeGroup2 ,clearTransactions);
 
 router.route("/getAllCategories").post(requireSignIn , isAgeGroup2 ,getAllCategories);
 router.route("/removeCategory").post(requireSignIn , isAgeGroup2 ,removeCategory);

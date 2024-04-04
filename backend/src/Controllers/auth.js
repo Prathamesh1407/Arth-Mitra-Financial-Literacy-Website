@@ -30,13 +30,11 @@ const signUp = async (req, res) => {
       });
     }
     //register user
-    const hashedPassword = await bcrypt.hash(password, 10);
-    //save
     const user = await User.create({
       fullName: name,
       username,
       email,
-      password: hashedPassword,
+      password: password,
       ageGroup,
       
     });
