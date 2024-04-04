@@ -7,7 +7,7 @@ const transactionSchema = new Schema(
             ref: "User"
         },
         category: {
-            type: Schema.Types.ObjectId, // one to whom 'subscriber' is subscribing
+            type: Schema.Types.ObjectId, 
             ref: "Category"
         },
         amount:{

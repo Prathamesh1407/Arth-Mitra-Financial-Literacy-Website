@@ -21,13 +21,14 @@ const addGoal = async(req ,res)=>{
             description,
             startDate
         })
-        return res.status(200).json(200, categoryDetails , "Category added successfully")
+        console.log(newGoal)
+        return res.status(200).json({ newGoal , message:"Goal added successfully"})
 
     }catch(error){
         console.error(error);
 		res.status(500).json({
 			success: false,
-			message: "Failed to add category",
+			message: "Failed to add goal",
 			error: error.message,
 		});
     }
@@ -48,7 +49,7 @@ const removeGoal = async(req , res)=>{
         await Goal.findByIdAndDelete(id);
       
 
-        return res.status(200).json(200 , "Transaction removed successfully")
+        return res.status(200).json({message: "Transaction removed successfully"})
         
     } catch (error) {
         console.error(error);

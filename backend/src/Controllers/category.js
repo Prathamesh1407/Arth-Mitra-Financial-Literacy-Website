@@ -16,7 +16,7 @@ const addCategory = async(req ,res)=>{
 
         const categoryDetails = await Category.create({name , type});
 
-        return res.status(200).json(200, categoryDetails , "Category added successfully")
+        return res.status(200).json({categoryDetails , message:"Category added successfully" })
 
     }catch(error){
         console.error(error);
