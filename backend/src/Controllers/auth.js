@@ -110,20 +110,6 @@ const Login = async (req, res) => {
       token,
     });
 
-
-    return res
-      .status(200)
-      .cookie("accessToken", accessToken, options)
-      .json({
-        success: true,
-        message: "login successfully",
-        user: {
-          _id: user._id,
-          name: user.name,
-          email: user.email,
-        },
-        accessToken,
-      });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
