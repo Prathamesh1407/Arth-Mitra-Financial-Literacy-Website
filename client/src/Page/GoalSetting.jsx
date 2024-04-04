@@ -1,54 +1,72 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal } from "antd";
+import { toast } from "react-hot-toast";
 import CategoryForm from "../Components/CategoryForm";
-import { useAuth } from "../../context/auth";
+import axios from "axios";
 const GoalSetting = () => {
-  const [auth, setAuth] = useAuth();
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
-  const [updatedName, setUpdatedName] = useState("");
+  const [currentAmount, setCurrentAmount] = useState(0);
+  const [updatedAmount, setUpdatedAmount] = useState(0);
+  const [description, setDescription] = useState("");
+  const [totalAmount, setTotalAmount] = useState(0);
   const [selected, setSelected] = useState(null);
   const [visible, setVisible] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios(
-        "/addGoal",
-        {currentAmount,totalAmount,description,startDate},
-      ).then((res) => {
-        if (res.success) {
-          toast.success(`${name} Category is Created`);
-          setName("");
-          getAllCategories();
-        } else {
-          toast.error(res.message);
-        }
-      });
+      await axios
+        .post("/addGoal", { currentAmount, totalAmount, description })
+        .then((res) => {
+          if (res.success) {
+            toast.success(`${name} Goal is Created`);
+            setName("");
+            getAllGoals();
+          } else {
+            toast.error(res.message);
+          }
+        });
     } catch (err) {
       console.log("Error in the Category Form", err);
     }
   };
-
+  const getAllGoals = async () => {
+    try {
+      await axios
+        .get("/getAllGoal")
+        .then((response) => {
+          if (response?.success) {
+            setCategories(response?.allCategories);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (err) {
+      console.log(err);
+      toast.error("Error while getting the Categories ");
+    }
+  };
+  useEffect(() => {
+    getAllGoals();
+  }, []);
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      console.log(updatedName);
-      await makeAuthenticatedPUTRequest(
-        `/api/v1/category/update-category/${selected._id}`,
-        { name: updatedName },
-        auth?.token
-      ).then((res) => {
-        if (res.success) {
-          toast.success(`${selected.name} is updated to ${updatedName}`);
-          setVisible(false);
-          setSelected(null);
-          setUpdatedName("");
-          getAllCategories();
-        } else {
-          toast.error(res.message);
-        }
-      });
+      await axios
+        .post(`/UpdateAmount`, { amount: updatedAmount, id: selected._id })
+        .then((res) => {
+          if (res.success) {
+            toast.success(`Amount Updated , 🪙 1 Coin for You as Reward`);
+            setVisible(false);
+            setSelected(null);
+            getAllGoals();
+            //setUpdatedName("")
+          } else {
+            toast.error(res.message);
+          }
+        });
     } catch (err) {
       console.log("Error in the Category Form", err);
     }
@@ -106,7 +124,7 @@ const GoalSetting = () => {
                         className="btn btn-primary ms-2"
                         onClick={() => {
                           setVisible(true);
-                          setUpdatedName(item.name);
+                          setUpdatedAmount(item.amount);
                           setSelected(item);
                         }}
                       >
@@ -123,8 +141,8 @@ const GoalSetting = () => {
       <Modal onCancel={() => setVisible(false)} footer={null} visible={visible}>
         <CategoryForm
           handleSubmit={handleUpdate}
-          value={updatedName}
-          setValue={setUpdatedName}
+          value={updatedAmount}
+          setValue={setUpdatedAmount}
         />
       </Modal>
     </div>
@@ -133,7 +151,8 @@ const GoalSetting = () => {
 
 export default GoalSetting;
 
-{/* <table class="table-fixed">
+{
+  /* <table class="table-fixed">
   <thead>
     <tr>
       <th>Song</th>
@@ -148,4 +167,5 @@ export default GoalSetting;
       <td>1961</td>
     </tr>
   </tbody>
-</table> */}
+</table> */
+}

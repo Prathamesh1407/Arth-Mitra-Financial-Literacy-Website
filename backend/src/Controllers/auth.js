@@ -8,7 +8,7 @@ dotenv.config();
 
 const signUp = async (req, res) => {
   try {
-    const { username , name, email, password , ageGroup } = req.body;
+    const { username, name, email, password, ageGroup } = req.body;
     //validations
     if (
         !username ||
@@ -46,7 +46,6 @@ const signUp = async (req, res) => {
       message: "User Registered Successfully",
       user: user,
     });
-
   } catch (error) {
     console.log(error);
     res.status(500).send({
@@ -56,10 +55,6 @@ const signUp = async (req, res) => {
     });
   }
 };
-
-
-
-
 
 //POST LOGIN
 const Login = async (req, res) => {
@@ -116,6 +111,19 @@ const Login = async (req, res) => {
     });
 
 
+    return res
+      .status(200)
+      .cookie("accessToken", accessToken, options)
+      .json({
+        success: true,
+        message: "login successfully",
+        user: {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+        },
+        accessToken,
+      });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
