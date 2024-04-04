@@ -132,6 +132,7 @@ const getCoins = async(req, res)=>{
       success: true,
       message: "login successfully",
       coins:user.coins,
+      age:user.ageGroup
     });
 
   } catch (error) {
