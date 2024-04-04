@@ -19,7 +19,7 @@ const addGoal = async(req ,res)=>{
 
         const newGoal = await Goal.create({
             userId:id,
-            currentAmount,
+            currentAmount:currentAmount || 0,
             totalAmount,
             description,
             startDate: Date.now()
