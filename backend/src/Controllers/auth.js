@@ -164,4 +164,36 @@ const getCoins = async (req, res) => {
   }
 };
 
-export { signUp, Login, getCoins, getTrends };
+const quizSubmit = async(req , res)=>{
+  try {
+
+    const {score} = req.body;
+
+    const id = req.user._id;
+
+    const user = await User.findByIdAndUpdate(
+      id,
+      { $inc: { coins: afterP - prevP } },
+      { new: true }
+    );
+
+    return res.status(201).json({
+      success: true,
+      message: "coins updated",
+      coins: user.coins,
+      increment: score,
+    });
+
+    
+    
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Error while Logging In",
+      error,
+    });
+  }
+}
+
+export { signUp, Login, getCoins, getTrends ,quizSubmit};
