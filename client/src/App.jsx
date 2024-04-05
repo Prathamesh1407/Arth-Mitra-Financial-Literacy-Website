@@ -20,6 +20,7 @@ import TaxSavingInformation from "./Page/TaxSavingInformation";
 import Quiz from "./Page/Quiz";
 import HomeY from "./Page/HomeY";
 import InsurancePage from "./Page/Insurance_page";
+import MutualFunds from "./Page/MutualFunds";
 function App() {
   return (
     <div>
@@ -48,6 +49,7 @@ function App() {
         <Route path="/expTracker" element={<ExpenseTracker/>} />
         <Route path="/quiz" element={<Quiz/>} />
         <Route path="/insurance" element={<InsurancePage/>} />
+        <Route path="/funds" element={<MutualFunds/>} />
       </Routes>
     </div>
   );

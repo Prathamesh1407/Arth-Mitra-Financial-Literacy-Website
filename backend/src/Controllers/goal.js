@@ -7,7 +7,7 @@ const addGoal = async (req, res) => {
 
     const id = req.user._id;
 
-    if (!currentAmount || !totalAmount || !description || !id) {
+    if ( !totalAmount || !description || !id) {
       return res.status(400).json({
         success: false,
         message: "All Fields are Mandatory",
@@ -22,7 +22,7 @@ const addGoal = async (req, res) => {
 
         const newGoal = await Goal.create({
             userId:id,
-            currentAmount,
+            currentAmount:currentAmount || 0,
             totalAmount,
             description,
             startDate: Date.now()
@@ -119,7 +119,7 @@ const UpdateAmount = async (req, res) => {
 
     amount = parseInt(amount);
 
-    const prevP = (goal.currentAmount / goal.totalAmount) * 100;
+    // const prevP = (goal.currentAmount / goal.totalAmount) * 100;
 
     goal.currentAmount += amount;
 
@@ -129,11 +129,11 @@ const UpdateAmount = async (req, res) => {
 
     await goal.save();
 
-    const afterP = (goal.currentAmount / goal.totalAmount) * 100;
+    // const afterP = (goal.currentAmount / goal.totalAmount) * 100;
 
     const user = await User.findByIdAndUpdate(
-      id,
-      { $inc: { coins: afterP - prevP } },
+      req.user._id,
+      { $inc: { coins: 5 } },
       { new: true }
     );
 
@@ -141,7 +141,7 @@ const UpdateAmount = async (req, res) => {
       success: true,
       message: "Current amount updated in goal",
       goal,
-      increment: afterP - prevP,
+      // increment: afterP - prevP,
     });
   } catch (error) {
     console.error(error);

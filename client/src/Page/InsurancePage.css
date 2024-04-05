@@ -1,4 +1,4 @@
-/* InsurancePage.css */
+/* InsurancePage.css
 
 .insurance-page {
     display: flex;
@@ -10,42 +10,42 @@
   .article {
     flex: 1;
     padding: 20px;
-    max-width: 700px; /* Adjust the maximum width as needed */
-    overflow: hidden; /* Hide overflow to prevent horizontal scrollbar */
+    max-width: 700px;
+    overflow: hidden; 
   }
   
   .article h1 {
     font-size: 2.5rem;
-    color: #c0c0c0; /* Silvery white text color */
-    background-color: #800080; /* Purple background */
+    color: #c0c0c0; 
+    background-color: #800080; 
     padding: 10px;
     border-radius: 10px;
     margin-bottom: 20px;
-    border: 2px solid #800080; /* Colored border */
+    border: 2px solid #800080;
   }
   
   .article h3 {
     font-size: 1.8rem;
-    color: #c0c0c0; /* Silvery white text color */
-    background-color: #800080; /* Purple background */
+    color: #c0c0c0;
+    background-color: #800080; 
     padding: 10px;
     border-radius: 10px;
     margin-bottom: 10px;
-    border: 2px solid #800080; /* Colored border */
+    border: 2px solid #800080; 
   }
   
   .article h4 {
     font-size: 1.5rem;
-    color: #c0c0c0; /* Silvery white text color */
-    background-color: #800080; /* Purple background */
+    color: #c0c0c0; 
+    background-color: #800080; 
     padding: 10px;
     border-radius: 10px;
-    border: 2px solid #800080; /* Colored border */
+    border: 2px solid #800080; 
   }
   
   .article p {
     font-size: 1.2rem;
-    color: #262020; /* Silvery white text color */
+    color: #262020;
   }
   
   .article ul,
@@ -56,7 +56,7 @@
   .article ul li,
   .article ol li {
     font-size: 1.2rem;
-    color: #262020; /* Silvery white text color */
+    color: #262020; 
   }
   
   .videos {
@@ -66,19 +66,19 @@
   
   .videos h2 {
     font-size: 2rem;
-    color: #c0c0c0; /* Silvery white text color */
-    background-color: #800080; /* Purple background */
+    color: #c0c0c0; 
+    background-color: #800080;
     padding: 10px;
     border-radius: 10px;
     margin-bottom: 20px;
-    border: 2px solid #800080; /* Colored border */
+    border: 2px solid #800080;
   }
   
   .video-container {
     display: flex;
     flex-wrap: nowrap;
     gap: 20px;
-    overflow-x: auto; /* Add horizontal scrolling for video container */
+    overflow-x: auto; 
   }
   
   .video {
@@ -114,5 +114,112 @@
     50% {
       transform: translateY(-10px);
     }
+  }
+   */
+
+   body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  .insurance-options {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    justify-content: space-between; /* Distribute items evenly along the main axis */
+    padding: 10px;
+    box-sizing: border-box; /* Include padding in width calculation */
+  }
+  
+  .insurance-page-container {
+    width: 100%;
+    height: 100%;
+    max-width: 1500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .insurance-page-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* //align-items: center; */
+    margin-bottom: 30px;
+  }
+  
+  .insurance-page-header-right {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  .insurance-page-header-left {
+    flex: 1;
+  }
+  
+  .insurance-page-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .insurance-page-paragraph {
+    font-size: 16px;
+  }
+  
+  .insurance-page-image {
+    max-width: 600px;
+    margin-left: auto; /* Align to the right */
+    margin-top: 20px; /* Add some spacing from the top */
+    margin-bottom: 20px; /* Add some spacing from the bottom */
+    display: block; /* Ensure it's displayed as a block element */
+    border-radius: 5px;
+  }
+  
+  
+  .insurance-page-video {
+    display: flex;
+    overflow-x: auto;
+    width: 100%;
+    max-width: 1500px;
+    gap: 20px;
+    padding: 20px 0;
+  }
+  
+  .insurance-page-video iframe {
+    width: 300px;
+    height: 200px;
+    border-radius: 5px;
+  }
+  
+  
+  .insurance-page-data-table {
+    width: 100%;
+    max-width: 1500px;
+    margin-bottom: 30px;
+  }
+  
+  .insurance-page-faq {
+    width: 100%;
+    max-width: 1500px;
+    margin-bottom: 30px;
+  }
+  
+  .faq-item {
+    margin-bottom: 20px;
+  }
+  
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+  
+  .faq-answer {
+    margin-top: 10px;
+  }
+  
+  .faq-toggle-icon {
+    font-size: 20px;
   }
   

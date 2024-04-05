@@ -9,44 +9,6 @@ const ExpenseTracker = () => {
   const [type, setType] = useState('outgoing'); // 'outgoing' or 'incoming'
   const [visible, setVisible] = useState(false);
 
-  const getExpenses = async () => {
-    try {
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/getAllTransaction`,
-        {
-          accessToken: cookie?.token,
-        }
-      );
-
-      if (data) {
-        setExpenses(data?.allTransaction);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  useEffect(() => {
-    getExpenses();
-  }, []);
-  const addExpenses = async (req, res) => {
-    try {
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/addTransaction`,
-        {
-          amount,
-          category,
-          type,
-          accessToken: cookie?.token,
-        }
-      );
-
-      if (data) {
-        setExpenses(data?.allTransaction);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
   useEffect(() => {
     // Calculate current amount based on expenses
     let totalIncome = 0;
@@ -86,15 +48,15 @@ const ExpenseTracker = () => {
       <h1 className="text-3xl mb-4 text-center">Expense Tracker</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
         <div className="bg-green-200 p-4 rounded-lg">
-          <p className="text-lg font-bold mb-2">Total Income</p>
+          <p className="text-lg font-bold mb-2">Your Income</p>
           <p className="text-xl">{expenses.filter(expense => expense.type === 'incoming').reduce((acc, cur) => acc + cur.amount, 0)}</p>
         </div>
         <div className="bg-red-200 p-4 rounded-lg">
-          <p className="text-lg font-bold mb-2">Total Outgoing</p>
+          <p className="text-lg font-bold mb-2">Your Expenses</p>
           <p className="text-xl">{expenses.filter(expense => expense.type === 'outgoing').reduce((acc, cur) => acc + cur.amount, 0)}</p>
         </div>
         <div className="bg-blue-200 p-4 rounded-lg">
-          <p className="text-lg font-bold mb-2">Total Amount</p>
+          <p className="text-lg font-bold mb-2">Your Net Worth</p>
           <p className="text-xl">{amount}</p>
         </div>
       </div>
@@ -116,7 +78,7 @@ const ExpenseTracker = () => {
           </select>
         </div>
         <div className="flex justify-evenly">
-          <button onClick={addExpenses} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add Expense</button>
+          <button onClick={addExpense} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add Expense</button>
           <button onClick={() => setVisible(true)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Show Chart</button>
         </div>
       </div>

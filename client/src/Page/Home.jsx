@@ -8,6 +8,7 @@ import service2 from "../assets/images/wagoal.jpeg";
 import service3 from "../assets/images/wasip.jpeg";
 import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
+import ChatButton from "./ChatButton";
 
 const Home = () => {
   return (
@@ -27,9 +28,10 @@ const Home = () => {
             becoming a stock market Guru easy with our AI-powered Finance
             Advisor - Arth Sathi 🤵🏻
           </p>
-          <button className="bg-gradient-to-r from-green-400 to-green-700 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-5">
+          {/* <button onClick={()=>{<ChatButton/>}} className="bg-gradient-to-r from-green-400 to-green-700 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-5">
             Chat with ArthaSathi 💬
-          </button>
+          </button> */}
+          <ChatButton/>
           <div className="absolute -bottom-72 w-2/4 h-4/5">
             <img src={Hero} alt="Demo-Image" />
           </div>

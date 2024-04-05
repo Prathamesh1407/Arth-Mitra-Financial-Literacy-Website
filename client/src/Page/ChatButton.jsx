@@ -14,7 +14,7 @@ const ChatButton = () => {
   };
 
   return (
-    <button id="chatWithChanakya" onClick={handleClick}>
+    <button id="chatWithChanakya" onClick={handleClick} className="bg-gradient-to-r from-green-400 to-green-700 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-5">
       Chat with Chanakya
     </button>
   );

@@ -7,6 +7,7 @@ import service2 from '../assets/images/wagoal.jpeg';
 import service3 from '../assets/images/wasip.jpeg';
 import quiz from '../assets/images/quiz.jpg';
 import Footer from '../Components/Footer';
+import ChatButton from './ChatButton';
 
 
 
@@ -24,9 +25,10 @@ const HomeY = () => {
             <p className="text-lg mb-6 text-center w-3/5">
               Wanna learn how to grow your money to become rich? We have made becoming a stock market Guru easy with our AI-powered Finance Advisor - Arth Sathi 🤵🏻
             </p>
-            <button className="bg-gradient-to-r from-green-400 to-green-700 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-5">
+            {/* <button onClick={()=>{<ChatButton/>}} className="bg-gradient-to-r from-green-400 to-green-700 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-5">
               Chat with ArthaSathi 💬
-            </button>
+            </button> */}
+            <ChatButton/>
             <div className="absolute -bottom-72 w-2/4 h-4/5">
               <img src={Hero} alt="Demo-Image"/>
             </div>

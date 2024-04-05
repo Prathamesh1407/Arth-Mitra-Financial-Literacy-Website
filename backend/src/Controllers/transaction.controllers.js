@@ -15,10 +15,10 @@ const addTransaction = async(req ,res)=>{
 			});
         }
 
-        const categoryDetails = await Category.find({name:category});
+        let categoryDetails = await Category.find({name:category});
 
         if(!categoryDetails){
-            await category.create({name:category , type:type});
+            categoryDetails = await category.create({name:category , type:type});
         }
 
 
@@ -29,10 +29,9 @@ const addTransaction = async(req ,res)=>{
             date : Date.now(),
             userId:userId,
             category: categoryDetails._id
-
         });
 
-        const user = await User.findByIdAndUpdate(id, { $inc: { coins: 1 } }, { new: true });
+        const user = await User.findByIdAndUpdate(userId, { $inc: { coins: 1 } }, { new: true });
 
 
         return res.status(200).json({t , message:"Transaction added successfully"})

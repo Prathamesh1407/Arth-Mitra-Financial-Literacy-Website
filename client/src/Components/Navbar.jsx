@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Navbar = () => {
+  const navigate=useNavigate();
   const [navbarType, setNavbarType] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   const [coins, setCoins] = useState(0);
@@ -81,9 +82,6 @@ const Navbar = () => {
         <div className="text-white hover:text-gray-300 text-lg cursor-pointer">
           <Link to="/tax">Tax Systems💵</Link>
         </div>
-        <div className="text-white hover:text-gray-300 text-lg cursor-pointer">
-          <Link to="/insurance">Insurance💰</Link>
-        </div>
       </div>
       <div className="flex items-center">
         <span className="text-white mr-2 text-lg">🪙{coins}</span>
@@ -114,6 +112,9 @@ const Navbar = () => {
         </div>
         <div className="text-white hover:text-gray-300 text-lg cursor-pointer">
           <Link to="/insurance">Insurance💰</Link>
+        </div>
+        <div className="text-white hover:text-gray-300 text-lg cursor-pointer">
+          <Link to="/funds">Mutual Funds📈</Link>
         </div>
       </div>
       <div className="flex items-center">
@@ -169,17 +170,18 @@ const Navbar = () => {
           {navbarType === "navbarType4" && <NavbarType4 />}
         </>
       ) : (
-        <nav className=" bg-blue-800 p-4">
-          <div className="flex justify-between space-x-4">
-            <span className="text-white hover:text-gray-300 cursor-pointer">
-              Home
-            </span>
-            <div className="text-white hover:text-gray-300 cursor-pointer">
-              <Link to={"/login"}>Login/Register</Link>
-            </div>
-            {/* <span className="text-white hover:text-gray-300 cursor-pointer">Register</span> */}
-          </div>
-        </nav>
+        // <nav className=" bg-blue-800 p-4">
+        //   <div className="flex justify-between space-x-4">
+        //     <span className="text-white hover:text-gray-300 cursor-pointer">
+        //       Home
+        //     </span>
+        //     <div className="text-white hover:text-gray-300 cursor-pointer">
+        //       <Link to={"/login"}>Login/Register</Link>
+        //     </div>
+        //     {/* <span className="text-white hover:text-gray-300 cursor-pointer">Register</span> */}
+        //   </div>
+        // </nav>
+        navigate('/login')
       )}
     </>
   );
