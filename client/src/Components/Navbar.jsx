@@ -170,18 +170,18 @@ const Navbar = () => {
           {navbarType === "navbarType4" && <NavbarType4 />}
         </>
       ) : (
-        // <nav className=" bg-blue-800 p-4">
-        //   <div className="flex justify-between space-x-4">
-        //     <span className="text-white hover:text-gray-300 cursor-pointer">
-        //       Home
-        //     </span>
-        //     <div className="text-white hover:text-gray-300 cursor-pointer">
-        //       <Link to={"/login"}>Login/Register</Link>
-        //     </div>
-        //     {/* <span className="text-white hover:text-gray-300 cursor-pointer">Register</span> */}
-        //   </div>
-        // </nav>
-        navigate('/login')
+        <nav className=" bg-blue-800 p-4">
+          <div className="flex justify-between space-x-4">
+            {/* <span className="text-white hover:text-gray-300 cursor-pointer">
+              Home
+            </span> */}
+            <div className="text-white hover:text-gray-300 cursor-pointer">
+              <Link to={"/login"}>Login/Register</Link>
+            </div>
+            {/* <span className="text-white hover:text-gray-300 cursor-pointer">Register</span> */}
+          </div>
+        </nav>
+        // navigate('/login')
       )}
     </>
   );
