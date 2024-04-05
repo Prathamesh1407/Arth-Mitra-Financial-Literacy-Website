@@ -9,9 +9,44 @@ const ExpenseTracker = () => {
   const [type, setType] = useState('outgoing'); // 'outgoing' or 'incoming'
   const [visible, setVisible] = useState(false);
 
-  
+  const getExpenses = async () => {
+    try {
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/getAllTransaction`,
+        {
+          accessToken: cookie?.token,
+        }
+      );
 
+      if (data) {
+        setExpenses(data?.allTransaction);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    getExpenses();
+  }, []);
+  const addExpenses = async (req, res) => {
+    try {
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/addTransaction`,
+        {
+          amount,
+          category,
+          type,
+          accessToken: cookie?.token,
+        }
+      );
 
+      if (data) {
+        setExpenses(data?.allTransaction);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   useEffect(() => {
     // Calculate current amount based on expenses
     let totalIncome = 0;
@@ -81,7 +116,7 @@ const ExpenseTracker = () => {
           </select>
         </div>
         <div className="flex justify-evenly">
-          <button onClick={addExpense} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add Expense</button>
+          <button onClick={addExpenses} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add Expense</button>
           <button onClick={() => setVisible(true)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Show Chart</button>
         </div>
       </div>
