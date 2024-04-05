@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "iconify": "^1.4.0",
-    "react-cookie": "^7.1.4",
-    "react-hot-toast": "^2.4.1"
-  }
-}
