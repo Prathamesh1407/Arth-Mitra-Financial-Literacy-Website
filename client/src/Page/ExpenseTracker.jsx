@@ -9,6 +9,9 @@ const ExpenseTracker = () => {
   const [type, setType] = useState('outgoing'); // 'outgoing' or 'incoming'
   const [visible, setVisible] = useState(false);
 
+  
+
+
   useEffect(() => {
     // Calculate current amount based on expenses
     let totalIncome = 0;

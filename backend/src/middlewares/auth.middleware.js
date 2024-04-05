@@ -1,18 +1,20 @@
-import JWT from 'jsonwebtoken'
-import {User} from '../models/user.model.js';
-import dotenv from 'dotenv'
+import JWT from "jsonwebtoken";
+import { User } from "../models/user.model.js";
+import dotenv from "dotenv";
 
-dotenv.config()
+dotenv.config();
 
 //Protected Routes token base
-const requireSignIn = async(req, res, next) => {
+const requireSignIn = async (req, res, next) => {
   try {
-    const token = req.body.accessToken || req.headers.authorization || req.cookies?.token ;
-    const decode = JWT.verify(token, process.env.JWT_SECRET);
+    console.log(req.body);
+    const token =
+      req.body.accessToken || req.headers.authorization || req.cookies?.token;
+    const decode =  JWT.verify(token, process.env.JWT_SECRET);
     req.user = decode;
     next();
   } catch (error) {
-    console.log("Error in MiddleWare :-",error);
+    console.log("Error in MiddleWare :-", error);
     return res.status(401).send({
       success: false,
       error,
@@ -21,7 +23,7 @@ const requireSignIn = async(req, res, next) => {
   }
 };
 
-//admin acceess
+//admin access
 const isAgeGroup1 = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id);
@@ -106,10 +108,4 @@ const isAgeGroup4 = async (req, res, next) => {
   }
 };
 
-export{
-    requireSignIn,
-    isAgeGroup1,
-    isAgeGroup2,
-    isAgeGroup3,
-    isAgeGroup4
-}
+export { requireSignIn, isAgeGroup1, isAgeGroup2, isAgeGroup3, isAgeGroup4 };

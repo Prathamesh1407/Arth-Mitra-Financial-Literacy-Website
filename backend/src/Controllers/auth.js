@@ -1,22 +1,15 @@
-import {User} from '../models/user.model.js';
-import jwt from "jsonwebtoken"
-import bcrypt from "bcrypt"
-import dotenv from "dotenv"
+import { User } from "../models/user.model.js";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import dotenv from "dotenv";
 
 dotenv.config();
-
 
 const signUp = async (req, res) => {
   try {
     const { username, name, email, password, ageGroup } = req.body;
     //validations
-    if (
-        !username ||
-      !email ||
-      !password ||
-      !ageGroup
-      
-    ) {
+    if (!username || !email || !password || !ageGroup) {
       return res.status(403).json({
         success: false,
         message: "All fields are required ",
@@ -37,8 +30,7 @@ const signUp = async (req, res) => {
       email,
       password: password,
       ageGroup,
-      coins:50
-      
+      coins: 50,
     });
     const jsonUser = JSON.stringify(user);
     res.status(201).json({
@@ -82,34 +74,38 @@ const Login = async (req, res) => {
         message: "Invalid Password",
       });
     }
-    const token = await  jwt.sign({
-                        _id: user._id,
-                        email: user.email,
-                        username: user.username,
-                        fullName: user.fullName,
-                        ageGroup: user.ageGroup
-                    },
-                    process.env.JWT_SECRET,
-                    {
-                        expiresIn: process.env.JWT_EXPIRY
-                    })
+    const token = await jwt.sign(
+      {
+        _id: user._id,
+        email: user.email,
+        username: user.username,
+        fullName: user.fullName,
+        ageGroup: user.ageGroup,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: process.env.JWT_EXPIRY,
+      }
+    );
 
     const options = {
-        httpOnly: true,
-        secure: true
-    }
+      httpOnly: true,
+      secure: true,
+    };
 
-    return res.status(200).cookie("token", token, options).json({
-      success: true,
-      message: "login successfully",
-      user: {
-        _id: user._id,
-        name: user.name,
-        email: user.email
-      },
-      token,
-    });
-
+    return res
+      .status(200)
+      .cookie("token", token, options)
+      .json({
+        success: true,
+        message: "login successfully",
+        user: {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+        },
+        token,
+      });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -117,12 +113,36 @@ const Login = async (req, res) => {
       message: "Error while Logging In",
       error,
     });
-
-    
   }
 };
-
-const getCoins = async(req, res)=>{
+const getTrends = async (req, res) => {
+  try {
+    const GAINERS_URL =
+      "https://www.nseindia.com/api/live-analysis-variations?index=gainers";
+    const LOSERS_URL =
+      "https://www.nseindia.com/api/live-analysis-variations?index=loosers";
+    const MARKET_STATUS_URL = "https://www.nseindia.com/api/marketStatus";
+    let response = await fetch(`${GAINERS_URL}`);
+    const gain = await response.json();
+    response = await fetch(`${LOSERS_URL}`);
+    const lose = await response.json();
+    response = await fetch(`${MARKET_STATUS_URL}`);
+    const status = await response.json();
+    return res.status(200).json({
+      gain,
+      lose,
+      status,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Error while Logging In",
+      error,
+    });
+  }
+};
+const getCoins = async (req, res) => {
   try {
     const id = req.user._id;
 
@@ -131,9 +151,9 @@ const getCoins = async(req, res)=>{
     return res.status(200).json({
       success: true,
       message: "login successfully",
-      coins:user.coins,
+      coins: user.coins,
+      ageGroup: user.ageGroup,
     });
-
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -142,10 +162,6 @@ const getCoins = async(req, res)=>{
       error,
     });
   }
-}
+};
 
-export {
-    signUp,
-    Login,
-    getCoins
-}
+export { signUp, Login, getCoins, getTrends };
