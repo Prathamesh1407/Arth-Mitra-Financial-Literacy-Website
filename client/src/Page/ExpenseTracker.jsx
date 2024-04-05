@@ -45,7 +45,7 @@ const ExpenseTracker = () => {
 
   return (
     <div className="container mx-auto mt-8 border p-8 rounded-lg">
-      <h1 className="text-3xl mb-4 text-center">Expense Tracker</h1>
+      <h1 className="text-3xl mb-4 text-center font-bold">Expense Tracker</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
         <div className="bg-green-200 p-4 rounded-lg">
           <p className="text-lg font-bold mb-2">Your Income</p>
@@ -79,7 +79,7 @@ const ExpenseTracker = () => {
         </div>
         <div className="flex justify-evenly">
           <button onClick={addExpense} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add Expense</button>
-          <button onClick={() => setVisible(true)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Show Chart</button>
+          {/* <button onClick={() => setVisible(true)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Show Chart</button> */}
         </div>
       </div>
 
@@ -98,9 +98,9 @@ const ExpenseTracker = () => {
         <button onClick={clearAllExpenses} className="mt-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline">Clear All</button>
       </div>
 
-      <Modal onCancel={() => setVisible(false)} footer={null} visible={visible}>
+      {/* <Modal onCancel={() => setVisible(false)} footer={null} visible={visible}>
         <Chart />
-      </Modal>
+      </Modal> */}
     </div>
   );
 };
