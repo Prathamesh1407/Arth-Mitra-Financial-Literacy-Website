@@ -4,7 +4,7 @@ import { User } from "../models/user.model.js";
 
 const addTransaction = async(req ,res)=>{
     try{
-        const {amount , category , description } = req.body;
+        const {amount , category , description , type } = req.body;
 
         const userId = req.user._id;
 
@@ -16,6 +16,10 @@ const addTransaction = async(req ,res)=>{
         }
 
         const categoryDetails = await Category.find({name:category});
+
+        if(!categoryDetails){
+            await category.create({name:category , type:type});
+        }
 
 
 
