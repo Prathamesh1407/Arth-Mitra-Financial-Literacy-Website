@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className='mx-auto mt-16 mb-10 max-w-maxContent flex flex-col items-center justify-between text-black'>
       <div className='flex flex-row justify-between'>
-        <div className=' w-1/4 text-xl '>We at FinVeda aim to make you a stock market Guru easy with our AI powered teaching and financial blogs.</div>
+        <div className=' w-1/4 text-xl '>We at CHANAKYA aim to make you a stock market Guru easy with our AI powered teaching and financial blogs.</div>
         <div>
           <div>Quick Links</div>
             <li><a href="./blogs/privacy-policy.html">Privacy Policy</a></li>

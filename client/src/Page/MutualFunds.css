@@ -1,0 +1,95 @@
+body {
+    background-color: #f5f3f9; /* Faint violet shade */
+  }
+  
+  .mutual-funds-container {
+    margin: 20px;
+  }
+  
+  .mutual-funds-header {
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  .mutual-funds-header-left {
+    flex: 1;
+  }
+  
+  .mutual-funds-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .mutual-funds-image {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 8px;
+    margin-left: 90px; /* Move the image to the extreme right corner */
+    margin-right: 20px; /* Add spacing on the right side */
+  }
+
+  .mutual-funds-subtitle {
+    font-weight: bold;
+    margin-top: 20px;
+  }
+
+  .mutual-funds-paragraph {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  .mutual-funds-paragraph p {
+    margin-bottom: 15px;
+  }
+  
+  .mutual-funds-title {
+    font-weight: bold;
+  }
+  
+  .mutual-funds-paragraph {
+    font-size: 19px;
+    line-height: 1.6;
+  }
+  
+  .mutual-funds-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 20px;
+  }
+  
+  .mutual-funds-card {
+    background: linear-gradient(135deg, #69e1df, #f0f0f0);
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .mutual-funds-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.796);
+  }
+  
+  .mutual-funds-card:active {
+    background: #bbca77;
+  }
+  
+  .mutual-funds-info {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .mutual-funds-info-box {
+    flex: 1 1 calc(50% - 20px);
+    padding: 10px;
+  }
+  
+  .mutual-funds-info-box p {
+    margin: 5px 0;
+  }
+  
+  .font-semibold {
+    font-weight: 600;
+  }
+  

@@ -25,6 +25,7 @@ const SignUp = () => {
     );
     if (response) {
       toast.success("Registered Successfully ✅");
+      navigate('/login')
     }
   };
   return (
