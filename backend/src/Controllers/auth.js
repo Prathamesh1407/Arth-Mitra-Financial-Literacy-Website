@@ -164,10 +164,9 @@ const getCoins = async (req, res) => {
   }
 };
 
-const quizSubmit = async(req , res)=>{
+const quizSubmit = async (req, res) => {
   try {
-
-    const {score} = req.body;
+    const { score } = req.body;
 
     const id = req.user._id;
 
@@ -183,9 +182,6 @@ const quizSubmit = async(req , res)=>{
       coins: user.coins,
       increment: score,
     });
-
-    
-    
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -194,6 +190,6 @@ const quizSubmit = async(req , res)=>{
       error,
     });
   }
-}
+};
 
-export { signUp, Login, getCoins, getTrends ,quizSubmit};
+export { signUp, Login, getCoins, getTrends, quizSubmit };
